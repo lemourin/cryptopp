@@ -29,7 +29,8 @@
 // https://www.cryptopp.com/wiki/Release_Process#Self_Tests
 // Some relevant bug reports can be found at:
 // * Clang: http://github.com/weidai11/cryptopp/issues/147
-#if (defined(_MSC_VER) && defined(__clang__) && !(defined( __clang_analyzer__)))
+#if (defined(_MSC_VER) && defined(__clang__) && \
+     !(defined(__clang_analyzer__)) && !defined(CRYPTOPP_SUPPORT_CLANG_CL))
 # error: "Unsupported configuration"
 #endif
 
@@ -56,7 +57,7 @@
 #endif
 
 // Microsoft compilers
-#if defined(_MSC_VER)
+#if defined(_MSC_VER) && !defined(CRYPTOPP_SUPPORT_CLANG_CL)
 	#define CRYPTOPP_NO_VTABLE __declspec(novtable)
 #else
 	#define CRYPTOPP_NO_VTABLE
