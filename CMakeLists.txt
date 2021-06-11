@@ -43,6 +43,8 @@ else ()
   endif ()
 endif ()
 
+enable_language(ASM)
+
 # Need to set SRC_DIR manually after removing the Python library code.
 set(SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
@@ -699,11 +701,6 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU
         list(APPEND cryptopp_SOURCES ${SRC_DIR}/sha1_armv4.S)
         list(APPEND cryptopp_SOURCES ${SRC_DIR}/sha256_armv4.S)
         list(APPEND cryptopp_SOURCES ${SRC_DIR}/sha512_armv4.S)
-
-        set_source_files_properties(${SRC_DIR}/aes_armv4.S PROPERTIES LANGUAGE CXX)
-        set_source_files_properties(${SRC_DIR}/sha1_armv4.S PROPERTIES LANGUAGE CXX)
-        set_source_files_properties(${SRC_DIR}/sha256_armv4.S PROPERTIES LANGUAGE CXX)
-        set_source_files_properties(${SRC_DIR}/sha512_armv4.S PROPERTIES LANGUAGE CXX)
 
         if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
           set_source_files_properties(${SRC_DIR}/aes_armv4.S PROPERTIES COMPILE_FLAGS "-march=armv7-a -mthumb -mfpu=neon -Wa,--noexecstack")
